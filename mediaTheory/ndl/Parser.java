@@ -10,7 +10,7 @@ public class Parser
 		this.csv=needHeader?"国立国会図書館リンク,タイトル,著者,出版者,年,シリーズ\n":"\n";
 		String[] books = divide(source);//「<a href="https://iss.ndl.go.jp/books/」で区切る
 		books = remove0(books);//先頭だけ無意味なデータなので切り落とす
-		has15 = books.length==15;
+		has15 = books.length==15;//デフォルトで、検索結果の件数は1ページあたり15件
 		String link, title, publisher, year, series;
 		String[] authors;
 		for(String book : books)//それぞれの書籍について
@@ -38,35 +38,6 @@ public class Parser
 		for(int i=1; i<before.length; i++)after[i-1]=before[i];
 		return after;
 	}
-
-	/*
-	 * ヒント: bookの内容例は次のとおり
-R100000001-I005612946-00">放送学序説</a>
-    </h3>
-    <p>
-      ＮＨＫ総合放送文化研究所放送学研究室／編
-      <span style="padding-left:5px;">
-        日本放送出版協会
-        1975
-
-      </span>
-    </p>
-  </div>
-</li>
-
-        </div><div id="list_item_1" class="type-thumbnail">
-          <li class="item_result item_book itempadding" style="">
-  <div class="material_image">
-    <img alt="資料種別" height="115" onError="this.onerror = null;this.src='/images/ndl/ico_class_thumbnail_book.gif';" src="/images/ndl/ico_class_thumbnail_book.gif?1515070139" width="115" />
-  </div>
-  <div class="material_category">
-      図書
-  </div>
-  <div class="item_summarywrapper">
-    <h3>
-
-	 */
-
 	private String getLink(String book){return "https://iss.ndl.go.jp/books/"+book.split("\"")[0];}//「"」で区切った0番目を返せばよい
 	private String getTitle(String book){return book.split("<|>")[1];}//「<」または「>」で区切った1番目を返せばよい
 	private String[] getAuthors(String book){return book.split("(\r\n)|\r|\n")[3].replaceFirst("( |\t)*", "").split("／([^,])+,?");}
