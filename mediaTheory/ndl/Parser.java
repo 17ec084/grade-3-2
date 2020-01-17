@@ -76,21 +76,3 @@ R100000001-I005612946-00">放送学序説</a>
 
 
 }
-
-
-/*	try
-	{
-		  File file = new File("c:¥¥tmp¥¥test.txt");
-		  FileReader filereader = new FileReader(file);
-
-		  int ch;
-		  while((ch = filereader.read()) != -1){
-		    System.out.print((char)ch);
-		  }
-	}catch(FileNotFoundException e){
-	  System.out.println(e);
-	}catch(IOException e){
-	  System.out.println(e);
-	}
-*/
-
